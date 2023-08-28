@@ -18,11 +18,20 @@ read -rp  "Enter time to set alarm (HH:MM): " alarm_time
 # validate input time format
 validate_alarm_time "$alarm_time"
 
-current_time=$(date +%R)
-while [ "$alarm_time" -lt "$current_time" ]
-do
-    sleep 1
-    echo "%(date +%R)"
 
+while true
+do
+    current_time=$(date +%R)
+    if [ "$alarm_time" \> "$current_time" ]
+    then
+        echo "Alarm will be triggered"
+        sleep 1
+        date +%R
+        
+    else
+        echo "Alarm is triggered"
+        date +%R
+        break
+
+    fi
 done
-echo "Time has passed"
